@@ -2,6 +2,7 @@
 #include<queue>
 #include<vector>
 #include<string>
+#include<stack>
 using namespace std;
 
 typedef struct BiTreeNode
