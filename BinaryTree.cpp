@@ -183,6 +183,40 @@ void postOrder(Node *root)
     }
 }
 
+//后序遍历的非递归算法实现（未经运行验证）
+void postOrder_2(Node *root)
+{
+    stack<Node> S;
+    Node *p = root, *r = new Node;
+    
+    while(p != NULL || !S.empty())
+    {
+        if(p != NULL)        //走到最左边
+        {
+            S.push(p);
+            p = p->lchild;
+        }
+        else
+        {
+            p = S.top();
+            if(p->rchild != NULL && p->rchild != r)        //若右子树存在且未访问
+            {
+                p = p->rchild;        //右转
+                S.push(p);
+                p = p->lchild;        //再走到最左
+            }
+            else
+            {
+                p = S.top();
+                visit(p);
+                S.pop();
+                r = p;        //记录最近访问过的结点
+                p = NULL;
+            }
+        }
+    }
+}        //当访问结点p时，栈中结点恰好是p结点的所有祖先
+
 //层次遍历
 void levelOrder(Node *root)
 {
